@@ -1,3 +1,5 @@
+require('dotenv').config(); // load env
+
 // importing packages 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -9,22 +11,12 @@ const productRouter = require('./routes/product');
 const userRouter = require('./routes/user');
 
 // init 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
-const DB = "mongodb+srv://MateoMaster:MateoMaster@cluster0.4wggvc5.mongodb.net/?retryWrites=true&w=majority"
+const DB = process.env.DB_URL;
 
 // middleware
-
-app.use(cors()); 
-
-// parse requests of content-type - application/json
-app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-
-
-
+app.use(express.json())
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
@@ -42,6 +34,6 @@ mongoose
     });
 
 
-app.listen(PORT,"0.0.0.0", ()=> {
+app.listen(PORT, ()=> {
     console.log(`connected at port ${PORT}`);
 });
