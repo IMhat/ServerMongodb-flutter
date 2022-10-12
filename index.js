@@ -14,7 +14,17 @@ const app = express();
 const DB = "mongodb+srv://MateoMaster:MateoMaster@cluster0.4wggvc5.mongodb.net/?retryWrites=true&w=majority"
 
 // middleware
-app.use(express.json())
+
+app.use(cors()); 
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+
+
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
