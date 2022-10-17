@@ -3,6 +3,8 @@ const userRouter = express.Router();
 const auth = require("../middlewares/auth");
 const Order = require("../models/order");
 const Wallets = require("../models/wallet");
+const Tasks = require("../models/task");
+const Transactions = require('../models/transaction');
 const { Product } = require("../models/product");
 const User = require("../models/user");
 
@@ -133,6 +135,30 @@ userRouter.get("/api/wallets/me", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+// get user's transaction
+userRouter.get("/api/transaction/me", auth, async (req, res) => {
+  try {
+    const transaction = await Transactions.find({ username: req.user.email });
+    res.json(transaction);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+
+// get user's task
+userRouter.get("/api/tasks/me", auth, async (req, res) => {
+  try {
+    const task = await Tasks.find({ username: req.user.email });
+    res.json(task);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
 
 
 

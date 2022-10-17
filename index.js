@@ -9,6 +9,7 @@ const adminRouter = require('./routes/admin');
 const authRouter = require('./routes/auth');
 const productRouter = require('./routes/product');
 const userRouter = require('./routes/user');
+const transactionRouter = require('./routes/transaction');
 
 // init 
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
 app.use(userRouter);
+app.use(transactionRouter);
 
 
 // connection to mongoDB
