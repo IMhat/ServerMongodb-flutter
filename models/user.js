@@ -51,11 +51,6 @@ const userSchema = mongoose.Schema({
             },
         },
     ],
-    wallet: [
-        {
-         wallet: walletSchema,
-        },
-    ]
 
 });
 
