@@ -2,13 +2,16 @@
 const express = require('express');
 
 const User = require("../models/user");
+const Wallets = require("../models/wallet");
 
 const bcryptjs = require("bcryptjs");
 
 const authRouter = express.Router();
 
 const jwt = require("jsonwebtoken");
+
 const auth = require('../middlewares/auth');
+
 
 // signup
 authRouter.post('/api/signup', async (req, res) => {
@@ -35,6 +38,17 @@ authRouter.post('/api/signup', async (req, res) => {
         })
         user = await user.save();
         res.json(user);
+
+
+        let wallet = new Wallets({
+            username: user.email,
+            balance,
+            userId: req.user,
+            
+          });
+          wallet = await wallet.save();
+          res.json(wallet);
+
     } catch (e) {
         res.status(500).json({error: e.message});
     }

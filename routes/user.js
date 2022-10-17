@@ -2,6 +2,7 @@ const express = require("express");
 const userRouter = express.Router();
 const auth = require("../middlewares/auth");
 const Order = require("../models/order");
+const Wallets = require("../models/wallet");
 const { Product } = require("../models/product");
 const User = require("../models/user");
 
@@ -120,5 +121,19 @@ userRouter.get("/api/orders/me", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+
+
+// get user's wallet
+userRouter.get("/api/wallets/me", auth, async (req, res) => {
+  try {
+    const wallet = await Wallets.find({ userId: req.user });
+    res.json(wallet);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
 
 module.exports = userRouter;
