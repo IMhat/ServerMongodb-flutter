@@ -15,10 +15,10 @@ const walletSchema = mongoose.Schema({
     required: true,
     default: 0,
   },
-  userId: {
-    required: true,
-    type: String,
-  },
+//   userId: {
+//     required: true,
+//     type: String,
+//   },
 
 });
 
