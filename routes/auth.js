@@ -36,16 +36,16 @@ authRouter.post('/api/signup', async (req, res) => {
             password: hashedPassword,
             name,
         })
-        user = await user.save();
-        res.json(user);
-
-
         let wallet = new Wallets({
-            username: user.email,
-            name: user.name,
+            username: email,
+            name: name,
           })
-          wallet = await wallet.save();
-          res.json(wallet);
+
+
+        user = await user.save();
+        wallet = await wallet.save();
+        res.json(user);
+        res.json(wallet);
 
     } catch (e) {
         res.status(500).json({error: e.message});
