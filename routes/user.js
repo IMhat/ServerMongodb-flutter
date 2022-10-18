@@ -129,7 +129,10 @@ userRouter.get("/api/orders/me", auth, async (req, res) => {
 // get user's wallet
 userRouter.get("/api/wallets/me", auth, async (req, res) => {
   try {
-    const wallet = await Wallets.find({ userId: req.user });
+    
+    let user = await User.findById(req.user);
+
+    const wallet = await Wallets.find({ username: user.email });
     res.json(wallet);
   } catch (e) {
     res.status(500).json({ error: e.message });
