@@ -31,7 +31,7 @@ const taskSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  AssignmentUser: {
+  assignmentUser: {
     type: String,
     required: true,
   },

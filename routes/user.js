@@ -129,7 +129,7 @@ userRouter.get("/api/orders/me", auth, async (req, res) => {
 // get user's wallet
 userRouter.get("/api/wallets/me", auth, async (req, res) => {
   try {
-    
+
     let user = await User.findById(req.user);
 
     const wallet = await Wallets.find({ username: user.email });
@@ -142,7 +142,9 @@ userRouter.get("/api/wallets/me", auth, async (req, res) => {
 // get user's transaction
 userRouter.get("/api/transaction/me", auth, async (req, res) => {
   try {
-    const transaction = await Transactions.find({ username: req.user.email });
+    let user = await User.findById(req.user);
+
+    const transaction = await Transactions.find({ trnxSummary: user.email });
     res.json(transaction);
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -154,7 +156,8 @@ userRouter.get("/api/transaction/me", auth, async (req, res) => {
 // get user's task (backlog)
 userRouter.get("/api/tasks/me", auth, async (req, res) => {
   try {
-    const task = await Tasks.find({ username: req.user.email });
+    let user = await User.findById(req.user);
+    const task = await Tasks.find({ assignmentUser: user.email });
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -164,7 +167,8 @@ userRouter.get("/api/tasks/me", auth, async (req, res) => {
 // get user's task (inprogress)
 userRouter.get("/api/tasks/inprogress/me", auth, async (req, res) => {
   try {
-    const task = await Tasks.find({ username: req.user, status: 'inprogress'});
+    let user = await User.findById(req.user);
+    const task = await Tasks.find({ assignmentUser: user.email, status: 'inprogress'});
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -174,7 +178,8 @@ userRouter.get("/api/tasks/inprogress/me", auth, async (req, res) => {
 // get user's task (done)
 userRouter.get("/api/tasks/done/me", auth, async (req, res) => {
   try {
-    const task = await Tasks.find({ username: req.user, status: 'done'});
+    let user = await User.findById(req.user);
+    const task = await Tasks.find({ assignmentUser: req.user.email, status: 'done'});
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
