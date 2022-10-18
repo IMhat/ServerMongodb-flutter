@@ -161,7 +161,7 @@ userRouter.get("/api/tasks/me", auth, async (req, res) => {
 // get user's task (inprogress)
 userRouter.get("/api/tasks/inprogress/me", auth, async (req, res) => {
   try {
-    const task = await Tasks.find({ username: req.user.email, status: 'inprogress'});
+    const task = await Tasks.find({ username: req.user, status: 'inprogress'});
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -171,7 +171,7 @@ userRouter.get("/api/tasks/inprogress/me", auth, async (req, res) => {
 // get user's task (done)
 userRouter.get("/api/tasks/done/me", auth, async (req, res) => {
   try {
-    const task = await Tasks.find({ username: req.user.email, status: 'done'});
+    const task = await Tasks.find({ username: req.user, status: 'done'});
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
