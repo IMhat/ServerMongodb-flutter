@@ -45,7 +45,7 @@ authRouter.post('/api/signup', async (req, res) => {
         user = await user.save();
         wallet = await wallet.save();
         res.json(user);
-        res.json(wallet);
+
 
     } catch (e) {
         res.status(500).json({error: e.message});
@@ -71,6 +71,9 @@ authRouter.post('/api/signin', async (req, res) => {
         const token = jwt.sign({id: user._id}, "passwordKey");
         // ... deconstructs user object. will give specific properties of user
         res.json({ token, ...user._doc });
+
+
+
 
     } catch (e) {
         res.status(500).json({error: e.message});
