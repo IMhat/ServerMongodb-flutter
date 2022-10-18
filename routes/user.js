@@ -139,12 +139,24 @@ userRouter.get("/api/wallets/me", auth, async (req, res) => {
   }
 });
 
-// get user's transaction
+// get user's TASK (u Add points) transaction
 userRouter.get("/api/transaction/me", auth, async (req, res) => {
   try {
     let user = await User.findById(req.user);
 
-    const transaction = await Transactions.find({ trnxSummary: user.email });
+    const transaction = await Transactions.find({ trnxSummary: user.email, purpose: 'transfer' });
+    res.json(transaction);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// get user's exchange transaction
+userRouter.get("/api/transaction/exchange/me", auth, async (req, res) => {
+  try {
+    let user = await User.findById(req.user);
+
+    const transaction = await Transactions.find({ trnxSummary: user.email, purpose: 'exchange' });
     res.json(transaction);
   } catch (e) {
     res.status(500).json({ error: e.message });
