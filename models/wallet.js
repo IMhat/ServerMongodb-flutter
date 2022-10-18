@@ -10,10 +10,10 @@ const walletSchema = mongoose.Schema({
     inmutable: true,
     unique: true,
   },
-//   namee: {
-//     type: String,
-//     trim: true,
-//   },
+  name: {
+    type: String,
+    trim: true,
+  },
   balance: {
     type: Number,
     required: true,

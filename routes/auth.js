@@ -36,12 +36,6 @@ authRouter.post('/api/signup', async (req, res) => {
             password: hashedPassword,
             name,
         })
-        let wallet = new Wallets({
-            username: user.email,
-            // namee: user.name,
-          })
-          wallet = await wallet.save();
-
 
         user = await user.save();
         
@@ -72,6 +66,12 @@ authRouter.post('/api/signin', async (req, res) => {
         const token = jwt.sign({id: user._id}, "passwordKey");
         // ... deconstructs user object. will give specific properties of user
         res.json({ token, ...user._doc });
+
+        let wallet = new Wallets({
+            username: user.email,
+            name: user.name,
+          })
+          wallet = await wallet.save();
 
 
 
