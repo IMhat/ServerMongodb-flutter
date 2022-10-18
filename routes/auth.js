@@ -67,14 +67,6 @@ authRouter.post('/api/signin', async (req, res) => {
         // ... deconstructs user object. will give specific properties of user
         res.json({ token, ...user._doc });
 
-        let wallet = new Wallets({
-            username: user.email,
-            name: user.name,
-          })
-          wallet = await wallet.save();
-
-
-
 
     } catch (e) {
         res.status(500).json({error: e.message});
