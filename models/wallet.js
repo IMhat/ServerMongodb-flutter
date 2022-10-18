@@ -7,9 +7,8 @@ const walletSchema = mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    inmutable: true,
-    unique: true,
   },
+
   name: {
     type: String,
     trim: true,
