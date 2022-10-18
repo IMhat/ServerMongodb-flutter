@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 
 const walletSchema = mongoose.Schema({
 
-  username: {
+  username: { 
     type: String,
-    required: true,
-    trim: true,
-  },
+     require: true, 
+     index:true, 
+     unique:true,
+     sparse:true,
+    },
 
   name: {
     type: String,

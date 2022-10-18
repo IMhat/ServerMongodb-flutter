@@ -28,11 +28,7 @@ authRouter.post('/api/signup', async (req, res) => {
             return res.status(400).json({msg: 'User with same email already exists!'});
         }
 
-        let wallet = new Wallets({
-            username: email,
-            name: name,
-          })
-        wallet = await wallet.save();
+
 
         const hashedPassword = await bcryptjs.hash(password, 8);
 
@@ -46,6 +42,12 @@ authRouter.post('/api/signup', async (req, res) => {
         user = await user.save();
         
         res.json(user);
+
+        let wallet = new Wallets({
+            username: user.email,
+            name: user.name,
+          })
+        wallet = await wallet.save();
 
 
     } catch (e) {
