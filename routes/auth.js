@@ -28,6 +28,12 @@ authRouter.post('/api/signup', async (req, res) => {
             return res.status(400).json({msg: 'User with same email already exists!'});
         }
 
+        let wallet = new Wallets({
+            username: user.email,
+            name: user.name,
+          })
+        wallet = await wallet.save();
+
         const hashedPassword = await bcryptjs.hash(password, 8);
 
         // let is basically var
