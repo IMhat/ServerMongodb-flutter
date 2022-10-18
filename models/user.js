@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { productSchema } = require("./product");
-const { walletSchema } = require("./wallet");
+
 
 const userSchema = mongoose.Schema({
     name: {
