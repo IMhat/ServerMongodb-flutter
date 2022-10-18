@@ -37,13 +37,14 @@ authRouter.post('/api/signup', async (req, res) => {
             name,
         })
         let wallet = new Wallets({
-            username: email,
-            name: name,
+            username: user.email,
+            name: user.name,
           })
+          wallet = await wallet.save();
 
 
         user = await user.save();
-        wallet = await wallet.save();
+        
         res.json(user);
 
 
