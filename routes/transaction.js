@@ -137,7 +137,7 @@ transactionRouter.post("/api/transaction/buyProduct", auth, async (req, res) => 
       const transferResult = await Promise.all([
         debitAccount(
           {amount, username:fromUsername, purpose:"exchange", reference, summary,
-          trnxSummary: `DEBIT FROM: ${fromUsername}`, session}),
+          trnxSummary: fromUsername, session}),
           //. TRNX REF:${reference}
       ]);
 
