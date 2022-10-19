@@ -200,4 +200,29 @@ userRouter.get("/api/tasks/done/me", auth, async (req, res) => {
 
 
 
+userRouter.update("/api/tasks/:id", auth, async (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Body can't be empty"
+    });
+  }
+
+  const id = req.params.id;
+
+  Tasks.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Couldn't update Task with id=${id}.`
+        });
+      } else res.send({ message: "Task was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "ERROR updating Task with id=" + id
+      });
+    });
+});
+
+
 module.exports = userRouter;
