@@ -200,7 +200,7 @@ userRouter.get("/api/tasks/done/me", auth, async (req, res) => {
 
 
 
-userRouter.update("/api/tasks/:id", auth, async (req, res) => {
+userRouter.put("/api/tasks/:id", auth, async (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Body can't be empty"
