@@ -169,7 +169,7 @@ userRouter.get("/api/transaction/exchange/me", auth, async (req, res) => {
 userRouter.get("/api/tasks/me", auth, async (req, res) => {
   try {
     let user = await User.findById(req.user);
-    const task = await Tasks.find({ assignmentUser: user.email, status: 'backlog' });
+    const task = await Tasks.find({ assignmentUser: user.email, status: 'backlog'});
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -191,7 +191,7 @@ userRouter.get("/api/tasks/inprogress/me", auth, async (req, res) => {
 userRouter.get("/api/tasks/done/me", auth, async (req, res) => {
   try {
     let user = await User.findById(req.user);
-    const task = await Tasks.find({ assignmentUser: req.user.email, status: 'done'});
+    const task = await Tasks.find({ assignmentUser: user.email, status: 'done'});
     res.json(task);
   } catch (e) {
     res.status(500).json({ error: e.message });
