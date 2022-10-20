@@ -1,5 +1,7 @@
 require('dotenv').config(); // load env
 
+const cors = require('cors');
+
 // importing packages 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -23,6 +25,9 @@ app.all('*', function(req, res, next){
     next();
 });
 
+app.use(cors({
+    origin: 'http://192.168.5.122:53181'
+}))
 
 // middleware
 app.use(express.json())
