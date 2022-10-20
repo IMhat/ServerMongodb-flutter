@@ -3,6 +3,7 @@ const adminRouter = express.Router();
 const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
 const Order = require("../models/order");
+const Tasks = require("../models/task");
 const { PromiseProvider } = require("mongoose");
 
 // Add product
@@ -113,5 +114,57 @@ async function fetchCategoryWiseProduct(category) {
   }
   return earnings;
 }
+
+
+// Get all backlog tasks
+
+adminRouter.get("/admin/get-backlog", admin, async (req, res) => {
+  try {
+    const tasks = await Tasks.find({status: 'backlog'});
+    res.json(tasks);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+// Get all ToDo tasks
+
+adminRouter.get("/admin/get-todo", admin, async (req, res) => {
+  try {
+    const tasks = await Tasks.find({status: 'ToDo'});
+    res.json(tasks);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+// Get all inprogress tasks
+
+adminRouter.get("/admin/get-inprogress", admin, async (req, res) => {
+  try {
+    const tasks = await Tasks.find({status: 'inprogress'});
+    res.json(tasks);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+// Get all done tasks
+
+adminRouter.get("/admin/get-done", admin, async (req, res) => {
+  try {
+    const tasks = await Tasks.find({status: 'done'});
+    res.json(tasks);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+// Get all approved tasks
+
+adminRouter.get("/admin/get-approved", admin, async (req, res) => {
+  try {
+    const tasks = await Tasks.find({status: 'approved'});
+    res.json(tasks);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 module.exports = adminRouter;
