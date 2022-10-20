@@ -26,7 +26,7 @@ app.all('*', function(req, res, next){
 });
 
 app.use(cors({
-    origin: 'http://192.168.5.122:53181'
+    origin: 'http://localhost:53181'
 }))
 
 // middleware
