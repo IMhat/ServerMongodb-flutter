@@ -167,4 +167,27 @@ adminRouter.get("/admin/get-approved", admin, async (req, res) => {
   }
 });
 
+// Add Task
+adminRouter.post("/admin/add-task", admin, async (req, res) => {
+  try {
+    const { title, priority, description, images, points, category, assignmentUser,status,createdBy } = req.body;
+    let task = new Tasks({
+      title,
+      priority,
+      description,
+      images,
+      points,
+      category,
+      assignmentUser,
+      status,
+      createdBy
+    
+    });
+    task= await task.save();
+    res.json(task);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 module.exports = adminRouter;
