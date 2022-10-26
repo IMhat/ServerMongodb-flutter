@@ -26,7 +26,7 @@ app.all('*', function(req, res, next){
 });
 
 app.use(cors({
-    origin: 'http://localhost:49851'
+    origin: 'http://localhost:55891'
    
     
     
