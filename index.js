@@ -27,7 +27,7 @@ app.all('*', function(req, res, next){
 
 app.use(cors({
 <<<<<<< HEAD
-    origin: 'http://localhost:55891'
+    
 =======
     origin: 'http://localhost:63624'
 >>>>>>> 7be3d1f43f061e6b91d3a2ba69a6c84a0a2121c6
