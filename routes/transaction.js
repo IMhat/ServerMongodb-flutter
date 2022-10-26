@@ -13,7 +13,7 @@ const { v4 } = require('uuid');
 const { creditAccount, debitAccount } = require( '../utils/transaction');
 
 
-transactionRouter.post("/api/transaction/transfer", auth, async (req, res) => {
+transactionRouter.post("/api/transaction/transfer", auth, admin, async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction()
     try {

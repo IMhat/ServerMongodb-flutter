@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const auth = require("../middlewares/auth");
+const admin = require("../middlewares/admin");
 const Order = require("../models/order");
 const Wallets = require("../models/wallet");
 const Tasks = require("../models/task");
@@ -200,7 +201,7 @@ userRouter.get("/api/tasks/done/me", auth, async (req, res) => {
 
 
 
-userRouter.put("/api/tasks/:id", auth, async (req, res) => {
+userRouter.put("/api/tasks/:id", auth, admin,  async (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Body can't be empty"
