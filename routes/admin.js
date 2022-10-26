@@ -170,7 +170,7 @@ adminRouter.get("/admin/get-approved", admin, async (req, res) => {
 // Add Task
 adminRouter.post("/admin/add-task", admin, async (req, res) => {
   try {
-    const { title, priority, description, images, points, category, assignmentUser,status,createdBy } = req.body;
+    const { title, priority, description, images, points, category, assignmentUser,status,createdBy, label, startDate, endDate, } = req.body;
     let task = new Tasks({
       title,
       priority,
@@ -180,7 +180,10 @@ adminRouter.post("/admin/add-task", admin, async (req, res) => {
       category,
       assignmentUser,
       status,
-      createdBy
+      createdBy,
+      label,
+      startDate,
+      endDate,
     
     });
     task= await task.save();

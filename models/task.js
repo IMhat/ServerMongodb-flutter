@@ -20,7 +20,6 @@ const taskSchema = mongoose.Schema({
   images: [
     {
       type: String,
-      required: true,
     },
   ],
   points: {
@@ -43,7 +42,17 @@ const taskSchema = mongoose.Schema({
     type: String,
     default: 'admin',
   },
-
+  label: {
+    type: String,
+  },
+  startDate: {
+    type: String,
+    required: true,
+  },
+  endDate: {
+    type: String,
+    required: true,
+  },
 
 });
 
