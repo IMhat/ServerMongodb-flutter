@@ -67,6 +67,19 @@ adminRouter.post("/admin/change-order-status", admin, async (req, res) => {
   }
 });
 
+//approved task
+adminRouter.post("/admin/change-task-status", admin, async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    let task = await Tasks.findById(id);
+    task.status = status;
+    task = await task.save();
+    res.json(task);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 adminRouter.get("/admin/analytics", admin, async (req, res) => {
   try {
     const orders = await Order.find({});
