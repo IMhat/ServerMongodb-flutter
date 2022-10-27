@@ -27,7 +27,7 @@ app.all('*', function(req, res, next){
 
 app.use(cors({
 // origin: 'https://vocal-pastelito-f96590.netlify.app', 
-origin: 'http://localhost:64755/'  
+origin: 'http://localhost:51098/'  
 }))
 
 // middleware
