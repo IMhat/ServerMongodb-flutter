@@ -29,7 +29,7 @@ transactionRouter.post("/api/transaction/transfer", auth, admin, async (req, res
       const transferResult = await Promise.all([
         debitAccount(
           {amount, username:fromUsername, purpose:"transfer", reference, summary,
-          trnxSummary: `TRFR TO: ${toUsername}`, session}),
+          trnxSummary: toUsername, session}),
         creditAccount(
           {amount, username:toUsername, purpose:"transfer", reference, summary,
           trnxSummary:`TRFR FROM: ${fromUsername}`, session})
@@ -86,7 +86,7 @@ transactionRouter.post("/api/transaction/addTask", admin, async (req, res) => {
         //   trnxSummary: `TRFR TO: ${toUsername}`, session}),
         creditAccount(
           {amount, username:toUsername, purpose:"transfer", reference, summary,
-          trnxSummary:`TRFR FROM: ${toUsername}`, session})
+          trnxSummary:toUsername, session})
 
           //. TRNX REF:${reference}
       ]);
