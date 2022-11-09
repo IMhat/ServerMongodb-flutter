@@ -46,7 +46,7 @@ adminRouter.post("/admin/delete-product", admin, async (req, res) => {
   }
 });
 
-adminRouter.get("/admin/get-orders", admin, async (req, res) => {
+adminRouter.get("/admin/get-orders", async (req, res) => {
   try {
     const orders = await Order.find({});
     res.json(orders);
@@ -55,7 +55,7 @@ adminRouter.get("/admin/get-orders", admin, async (req, res) => {
   }
 });
 
-adminRouter.post("/admin/change-order-status", admin, async (req, res) => {
+adminRouter.post("/admin/change-order-status",  async (req, res) => {
   try {
     const { id, status } = req.body;
     let order = await Order.findById(id);

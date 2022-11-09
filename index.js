@@ -25,9 +25,9 @@ app.all('*', function(req, res, next){
     next();
 });
 
-// app.use(cors({
-// origin: 'http://localhost:51098'  
-// }))
+app.use(cors({
+origin: 'http://localhost:65262'  
+}))
 
 // origin: 'https://vocal-pastelito-f96590.netlify.app',
 
