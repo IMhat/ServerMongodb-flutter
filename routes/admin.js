@@ -46,10 +46,37 @@ adminRouter.post("/admin/delete-product", admin, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+//new orders
 
-adminRouter.get("/admin/get-orders", async (req, res) => {
+adminRouter.get("/admin/get-new-orders", async (req, res) => {
   try {
-    const orders = await Order.find({});
+   
+    
+    const orders = await Order.find({status: "0" });
+    res.json(orders);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+//proccess orders
+
+adminRouter.get("/admin/get-process-orders", async (req, res) => {
+  try {
+   
+    
+    const orders = await Order.find({status: "1" });
+    res.json(orders);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+//incoming orders
+
+adminRouter.get("/admin/get-incoming-orders", async (req, res) => {
+  try {
+   
+    
+    const orders = await Order.find({status: "2" });
     res.json(orders);
   } catch (e) {
     res.status(500).json({ error: e.message });
