@@ -56,6 +56,16 @@ adminRouter.get("/admin/get-orders", async (req, res) => {
   }
 });
 
+//complete orders 
+adminRouter.get("/admin/get-complete-orders", async (req, res) => {
+  try {
+    const orders = await Order.find({status: "3" || "4" });
+    res.json(orders);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 adminRouter.post("/admin/change-order-status",  async (req, res) => {
   try {
     const { id, status } = req.body;
