@@ -246,7 +246,7 @@ adminRouter.post("/admin/add-task", admin, async (req, res) => {
 
 // Get all users
 
-adminRouter.get("/admin/get-users", admin, async (req, res) => {
+adminRouter.get("/admin/get-users", async (req, res) => {
   try {
     const users = await User.find()
     res.json(users);
