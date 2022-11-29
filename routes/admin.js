@@ -118,6 +118,30 @@ adminRouter.post("/admin/change-task-status", admin, async (req, res) => {
   }
 });
 
+//updated task
+adminRouter.post("/admin/update-task", admin, async (req, res) => {
+  try {
+    const { id,title,priority,description,points,category,assignmentUser,status, createdBy, label,startDate,endDate } = req.body;
+    let task = await Tasks.findById(id);
+    task.title= title;
+    task.priority=priority;
+    task.description= description;
+    task.points= points;
+    task.category= category;
+    task.assignmentUser=assignmentUser;
+    task.status = status;
+    task.createdBy=createdBy;
+    task.label=label;
+    task.startDate=startDate;
+    task.endDate=endDate;
+    
+    task = await task.save();
+    res.json(task);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 adminRouter.get("/admin/analytics", admin, async (req, res) => {
   try {
     const orders = await Order.find({});
